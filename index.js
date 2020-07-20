@@ -28,10 +28,18 @@ function processFirstItem(stringList, callback) {
  * 
  * 1. What is the difference between counter1 and counter2?
  * 
+ * Counter1 defines count within the function, which means its value is reset with each function call. Counter2 defines the count globally, which means it will continue to
+ * store an updated value with each call - it will not reset to zero.
+ * 
  * 2. Which of the two uses a closure? How can you tell?
+ * 
+ * Counter1 uses a closure which you can tell because it has an inner function. 
  * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
  *
+ * If you needed multiple functions to have access to the count variable, option 2 would be preferable, but in general option 1 is likely to be simpler and less likely
+ * to create problems down the line. 
+ * 
 */
 
 // counter1 code
@@ -56,11 +64,12 @@ function counter2() {
 
 Write a function called `inning` that returns a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
+function inning(){
 
-    /*Code Here*/
+    return Math.floor(Math.random() * 3);
 
 }
+
 
 /* Task 3: finalScore()
 
@@ -76,11 +85,18 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
-
-  /*Code Here*/
+function finalScore(inning, numOfInnings ){
+  homeScore = 0;
+  awayScore = 0;
+  for(let i = 0; i < numOfInnings; i++){
+    homeScore += inning();
+    awayScore += inning();
+  }
+  return `{Home: ${homeScore}\nAway: ${awayScore}}`;
 
 }
+
+console.log(finalScore(inning, 9));
 
 /* Task 4: 
 
@@ -103,8 +119,8 @@ and returns the score at each pont in the game, like so:
 Final Score: awayTeam - homeTeam */
 
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function scoreboard(getInningScore, inning, numOfInnings) {
+  
 }
 
 
